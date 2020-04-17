@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*-------------------------------------------------------------------------
@@ -19,6 +20,9 @@ Route::group(['middleware' => ['auth']], function () {
 | Admin Routes
 |-------------------------------------------------------------------------*/
 
-Route::get('/admin', 'Admin\AdminController@index');
-Route::get('/admin/players', 'Admin\Crawler\PlayerCrawlerController@index');
+Route::group(['middleware' => ['auth', 'admin']], function () {
 
+    Route::get('/admin', 'Admin\AdminController@index');
+    Route::get('/admin/players', 'Admin\Crawler\PlayerCrawlerController@index');
+
+});
