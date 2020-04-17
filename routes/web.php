@@ -14,3 +14,11 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('/', 'Dashboard\DashboardController@index')->name('home');
 });
+
+/*-------------------------------------------------------------------------
+| Admin Routes
+|-------------------------------------------------------------------------*/
+
+Route::get('/admin', 'Admin\AdminController@index');
+Route::get('/admin/players', 'Admin\Crawler\PlayerCrawlerController@index');
+
