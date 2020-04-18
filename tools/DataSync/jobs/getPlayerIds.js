@@ -1,7 +1,7 @@
 
 const { HLTV } = require('hltv');
-var moment = require('moment');
-var fs = require('fs');
+const moment = require('moment');
+const fs = require('fs');
 
 const filename = 'players.json';
 

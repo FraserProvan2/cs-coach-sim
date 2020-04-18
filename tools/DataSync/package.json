@@ -5,7 +5,8 @@
   "main": "SyncPlayers.js",
   "scripts": {
     "getPlayerIds": "node jobs/getPlayerIds.js",
-    "syncPlayers": "node jobs/SyncPlayers.js"
+    "syncPlayers": "node jobs/SyncPlayers.js",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +14,8 @@
     "hltv": "^2.19.4",
     "moment": "^2.24.0",
     "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "jest": "^25.3.0"
   }
 }

@@ -1,5 +1,5 @@
 const { HLTV } = require('hltv');
-var fs = require('fs');
+const fs = require('fs');
 const utils = require("../utils/db");
 
 const conn = utils.db();
