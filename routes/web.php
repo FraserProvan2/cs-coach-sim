@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*-------------------------------------------------------------------------
-| Routes
+| Core Routes
 |-------------------------------------------------------------------------*/
 
 Auth::routes();
@@ -12,8 +12,14 @@ Auth::routes();
 Route::get('/landing', 'Landing\LandingPageController@index')->name('landing');
 
 Route::group(['middleware' => ['auth']], function () {
-    
-    Route::get('/', 'Dashboard\DashboardController@index')->name('home');
+    // Play routes
+    Route::get('/', function () {
+        return redirect('/play');
+    });
+    Route::get('/play', 'Play\PlayController@index')->name('play');
+
+    // My Team routes
+    Route::get('/my-team', 'MyTeam\MyTeamController@index')->name('my-team');
 });
 
 /*-------------------------------------------------------------------------

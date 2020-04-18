@@ -2,7 +2,11 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+$primary: #f99d1c;
+// $secondary: #272e6f;
 
-// Bootstrap
+// Bootstrap/Bootswatch
+@import "node_modules/bootswatch/dist/superhero/variables";
 @import '~bootstrap/scss/bootstrap';
+@import "node_modules/bootswatch/dist/superhero/bootswatch";
+@import "../sass/bootstrap_override.scss";

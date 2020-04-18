@@ -12,13 +12,27 @@
 </head>
 <body>
     <div id="app">
-
-        @if(Request::path() !== 'landing')
-            @include('includes.navbar')
-        @endif
-
         <main class="py-4">
-            @yield('content')
+            
+            {{-- Main Nav --}}
+            @if(Request::path() !== 'landing')
+                @include('includes.navbar')
+            @endif
+
+            <div class="container">
+                <div class="row justify-content-center">
+                    
+                    {{-- Sider Bar Nav --}}
+                    <div class="col-md-3">
+                        @include('includes.sidebar')
+                    </div>
+                                
+                    {{-- Content --}}
+                    <div class="col-md-9">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 </body>
