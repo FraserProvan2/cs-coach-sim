@@ -1,0 +1,17 @@
+{
+  "name": "cs-coach-sim-data-sync",
+  "version": "1.0.0",
+  "description": "",
+  "main": "SyncPlayers.js",
+  "scripts": {
+    "getPlayerIds": "node jobs/getPlayerIds.js",
+    "syncPlayers": "node jobs/SyncPlayers.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "hltv": "^2.19.4",
+    "moment": "^2.24.0",
+    "mysql": "^2.18.1"
+  }
+}
