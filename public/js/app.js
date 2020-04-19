@@ -2013,12 +2013,15 @@ __webpack_require__.r(__webpack_exports__);
         id: this.player.id
       }).then(function (response) {
         _this.inTeam = response.data;
+        console.log(response);
 
         if (response.data === 1) {
           window.notifySuccess(_this.player.name + " added to Roster.");
         } else {
           window.notifySuccess(_this.player.name + " removed from Roster.");
         }
+      })["catch"](function (error) {
+        window.notifyError(error.response.data);
       });
     }
   }

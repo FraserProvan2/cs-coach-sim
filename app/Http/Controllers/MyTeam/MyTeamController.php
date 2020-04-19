@@ -31,6 +31,10 @@ class MyTeamController extends Controller
             $inventory_item->removeFromRoster();
             return 0;
         } else {
+            if($this->getRosterAmount() >= 5) {
+                return response('You already have 5 players in your roster', 400);
+            }
+            
             $inventory_item->addToRoster();
             return 1;
         }
@@ -47,5 +51,14 @@ class MyTeamController extends Controller
         }
 
         return $item;
+    }
+
+    private function getRosterAmount()
+    {
+        $roster = InventoryItem::where('user_id', Auth::user()->id)
+            ->where('in_team', 1)
+            ->get();
+
+        return count($roster);
     }
 }
