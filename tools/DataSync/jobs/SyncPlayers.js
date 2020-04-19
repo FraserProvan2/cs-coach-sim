@@ -51,7 +51,7 @@ function getPlayerStats() {
         res.statistics.damagePerRound,
       ]];
 
-      const query = "REPLACE INTO players (hltv_id, name, team, age, nationality, rating, headshots, kd_ratio, kpr, dpr) VALUES ?";
+      const query = "REPLACE INTO players (id, name, team, age, nationality, rating, headshots, kd_ratio, kpr, dpr) VALUES ?";
       conn.query(query, [records], function (err, result, fields) {
         if (err) {
           console.log("Failed: " + res.ign);

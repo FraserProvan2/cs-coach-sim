@@ -9,10 +9,10 @@
     <div class="card-body">
         <div class="card-list">
 
-            @foreach($players_card_data as $player_card_data)
+            @foreach($players as $player)
                 <div class="card-list-item">
                     <player-card 
-                        card-data="{{ json_encode($player_card_data) }}"
+                        card-data="{{ json_encode($player) }}"
                     ></player-card>
                 </div>
             @endforeach

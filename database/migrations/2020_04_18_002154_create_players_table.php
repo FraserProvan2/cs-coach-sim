@@ -14,9 +14,9 @@ class CreatePlayersTable extends Migration
     public function up()
     {
         Schema::create('players', function (Blueprint $table) {
-            // $table->id();
-            $table->string('hltv_id')->unique();
+            $table->string('id')->unique()->nullable();
             $table->string('name');
+            $table->string('type')->default('normal');
             $table->string('team')->nullable();
             $table->integer('age');
             $table->string('nationality');

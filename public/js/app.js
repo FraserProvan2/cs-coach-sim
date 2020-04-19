@@ -1908,8 +1908,6 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _img_mock_card_png__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../img/mock-card.png */ "./resources/img/mock-card.png");
-/* harmony import */ var _img_mock_card_png__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_img_mock_card_png__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1929,16 +1927,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['cardData', 'card-data'],
+  props: ["cardData", "card-data"],
   data: function data() {
     return {
-      cardImg: _img_mock_card_png__WEBPACK_IMPORTED_MODULE_0___default.a,
       player: JSON.parse(this.cardData)
     };
   },
   methods: {
+    getCardImage: function getCardImage() {
+      return "../images/cards/".concat(this.player.type, ".png");
+    },
     getPlayerImage: function getPlayerImage() {
       return "../images/players/".concat(this.player.id, ".png");
     }
@@ -6490,7 +6493,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.player-card[data-v-7c2cd226] {\n    background-size: cover;\n    height: 230px;\n    width: 170px;\n}\n.player-body-image[data-v-7c2cd226] {\n    position: relative;\n    max-width: 169px;\n    max-height: 187px;\n    bottom: -9px;\n    -webkit-clip-path: inset(0px 0px 62px 0px);\n            clip-path: inset(0px 0px 62px 0px);\n    opacity: 88%;\n}\n.player-name[data-v-7c2cd226] {\n    position: relative;\n    bottom: 50px;\n    text-align: center;\n}\n.player-stat[data-v-7c2cd226] {\n    text-align: center;\n    font-size: 10px;\n    position: relative;\n    bottom: 57px;\n}\n.player-stat-value[data-v-7c2cd226] {\nfont-weight: 600;\n    font-size: 12px;\n}\n\n", ""]);
+exports.push([module.i, "\n.player-card[data-v-7c2cd226] {\n  background-size: cover;\n  height: 230px;\n  width: 170px;\n}\n.player-body-image[data-v-7c2cd226] {\n  position: relative;\n  max-width: 169px;\n  max-height: 187px;\n  bottom: -9px;\n  -webkit-clip-path: inset(0px 0px 62px 0px);\n          clip-path: inset(0px 0px 62px 0px);\n  opacity: 88%;\n}\n.player-name[data-v-7c2cd226] {\n  position: relative;\n  bottom: 50px;\n  text-align: center;\n}\n.player-stat[data-v-7c2cd226] {\n  text-align: center;\n  font-size: 10px;\n  position: relative;\n  bottom: 57px;\n}\n.player-stat-value[data-v-7c2cd226] {\n  font-weight: 600;\n  font-size: 12px;\n}\n", ""]);
 
 // exports
 
@@ -37966,7 +37969,7 @@ var render = function() {
     "div",
     {
       staticClass: "player-card",
-      style: { backgroundImage: "url(" + _vm.cardImg + ")" }
+      style: { backgroundImage: "url(" + _vm.getCardImage() + ")" }
     },
     [
       _c("img", {
@@ -37979,21 +37982,21 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "player-stat" }, [
-        _vm._v("\n        Rating: \n        "),
+        _vm._v("\n    Rating:\n    "),
         _c("span", { staticClass: "player-stat-value" }, [
           _vm._v(_vm._s(this.player.rating.toFixed(2)))
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "player-stat" }, [
-        _vm._v("\n        KPR: \n        "),
+        _vm._v("\n    KPR:\n    "),
         _c("span", { staticClass: "player-stat-value" }, [
           _vm._v(_vm._s(this.player.kpr))
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "player-stat" }, [
-        _vm._v("\n        HS%: \n        "),
+        _vm._v("\n    HS%:\n    "),
         _c("span", { staticClass: "player-stat-value" }, [
           _vm._v(_vm._s(this.player.headshots))
         ])
@@ -50162,17 +50165,6 @@ module.exports = function(module) {
 	return module;
 };
 
-
-/***/ }),
-
-/***/ "./resources/img/mock-card.png":
-/*!*************************************!*\
-  !*** ./resources/img/mock-card.png ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/mock-card.png?d15b176a1748ce7fb47d5ae3d62754de";
 
 /***/ }),
 
