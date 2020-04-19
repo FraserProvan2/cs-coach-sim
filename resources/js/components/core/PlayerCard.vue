@@ -4,7 +4,7 @@
         <div class="player-name h6">{{ this.player.name }}</div>
         <div class="player-stat">
             Rating: 
-            <span class="player-stat-value">{{ this.player.rating }}</span>
+            <span class="player-stat-value">{{ this.player.rating.toFixed(2) }}</span>
         </div>
         <div class="player-stat">
             KPR: 

@@ -21,7 +21,10 @@ function downloadImage(uri, filename, callback){
 
     if (typeof res.headers['content-length'] === "undefined") {
       fs.copyFile('placeholder.png', filename, (err) => {
-        if (err) throw err;
+        var oldPath = filename;
+        var newPath = '../../public/images/players/' + filename;
+
+        fs.rename(oldPath, newPath, function () {});
         console.log('copied: ' + filename);
       });
     } else {

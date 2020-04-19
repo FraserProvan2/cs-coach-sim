@@ -37981,7 +37981,7 @@ var render = function() {
       _c("div", { staticClass: "player-stat" }, [
         _vm._v("\n        Rating: \n        "),
         _c("span", { staticClass: "player-stat-value" }, [
-          _vm._v(_vm._s(this.player.rating))
+          _vm._v(_vm._s(this.player.rating.toFixed(2)))
         ])
       ]),
       _vm._v(" "),
