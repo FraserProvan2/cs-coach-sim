@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/my-team/fetch', 'MyTeam\MyTeamController@getInventory');
 
         // team management
-        Route::post('/my-team/add-or-remove', 'MyTeam\MyTeamController@addOrRemoveFromTeam');
+        Route::post('/my-team/add-or-remove', 'MyTeam\MyTeamController@addOrRemoveFromRoster');
 });
 
 /*-------------------------------------------------------------------------

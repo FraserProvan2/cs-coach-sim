@@ -18,20 +18,13 @@ class InventoryItem extends Model
         return $this->belongsTo('App\Player');
     }
 
-    // public function getPlayerAttribute()
-    // {
-    //     return $this->player();
-    // }
-
-    
-
-    public function addToTeam()
+    public function addToRoster()
     {
         $this->in_team = 1;
         return $this->save();
     }
 
-    public function removeFromTeam()
+    public function removeFromRoster()
     {
         $this->in_team = 0;
         return $this->save();

@@ -23,15 +23,15 @@ class MyTeamController extends Controller
         return Auth::user()->inventory;
     }
 
-    public function addOrRemoveFromTeam(Request $request)
+    public function addOrRemoveFromRoster(Request $request)
     {
         $inventory_item = $this->getUsersItem($request->id);
         
         if ($inventory_item->in_team) {
-            $inventory_item->removeFromTeam();
+            $inventory_item->removeFromRoster();
             return 0;
         } else {
-            $inventory_item->addToTeam();
+            $inventory_item->addToRoster();
             return 1;
         }
     }
