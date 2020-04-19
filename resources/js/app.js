@@ -24,6 +24,45 @@ Vue.component('inventory', require('./components/core/Inventory.vue').default);
 
 
 /**
+ * Noty setup/adding functions to window
+ */
+
+import VueNotifications from 'vue-notifications';
+import Noty from 'noty';
+
+Noty.overrideDefaults({
+    theme: 'light',
+});
+
+function toast({title, message, type, timeout, cb}) {
+  if (type === VueNotifications.types.warn) type = 'warning'
+  return new Noty({text: message, timeout: 1800, type}).show()
+}
+
+Vue.use(VueNotifications, {
+  success: toast,
+  error: toast,
+  info: toast,
+  warn: toast
+});
+
+window.notifySuccess = function(message) {
+    toast({
+        type: VueNotifications.types.success,
+        title: '',
+        message: '<i class="fas fa-check"></i>&nbsp;&nbsp;' + message
+    });
+};
+
+window.notifyError = function(message) {
+    toast({
+        type: VueNotifications.types.error,
+        title: '',
+        message: '<i class="fas fa-exclamation"></i>&nbsp;&nbsp;' + message
+    });
+};
+
+/**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.

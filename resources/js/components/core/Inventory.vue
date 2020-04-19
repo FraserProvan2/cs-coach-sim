@@ -7,7 +7,7 @@
     >
       <player-card 
         :cardData="item.player"
-        :inTeam="item.in_team"
+        :inTeamData="item.in_team"
       ></player-card>
     </div>
   </div>

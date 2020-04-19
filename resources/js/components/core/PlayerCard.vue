@@ -36,11 +36,12 @@
 
 <script>
 export default {
-  props: ["cardData", "card-data", "in-team"],
+  props: ["cardData", "card-data", "in-team-data"],
 
   data: function() {
     return {
       player: this.cardData,
+      inTeam: this.inTeamData
     };
   },
 
@@ -57,8 +58,14 @@ export default {
         })
         .then(response => {
           this.inTeam = response.data;
+        
+          if (response.data === 1) {
+            window.notifySuccess(this.player.name + " added to Roster.");
+          } else {
+            window.notifySuccess(this.player.name + " removed from Roster.");
+          }
         });
-    }
+    },
   }
 };
 </script>
