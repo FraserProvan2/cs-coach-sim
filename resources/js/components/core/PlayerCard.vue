@@ -58,13 +58,14 @@ export default {
         })
         .then(response => {
           this.inTeam = response.data;
-          console.log(response);
         
           if (response.data === 1) {
             window.notifySuccess(this.player.name + " added to Roster.");
           } else {
             window.notifySuccess(this.player.name + " removed from Roster.");
           }
+
+          window.bus.$emit('team_update', {});
         }).catch(error => {
            window.notifyError(error.response.data);
         });

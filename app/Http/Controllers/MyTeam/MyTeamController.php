@@ -23,6 +23,15 @@ class MyTeamController extends Controller
         return Auth::user()->inventory;
     }
 
+    public function getRosterAmount()
+    {
+        $roster = InventoryItem::where('user_id', Auth::user()->id)
+            ->where('in_team', 1)
+            ->get();
+
+        return count($roster);
+    }
+
     public function addOrRemoveFromRoster(Request $request)
     {
         $inventory_item = $this->getUsersItem($request->id);
@@ -51,14 +60,5 @@ class MyTeamController extends Controller
         }
 
         return $item;
-    }
-
-    private function getRosterAmount()
-    {
-        $roster = InventoryItem::where('user_id', Auth::user()->id)
-            ->where('in_team', 1)
-            ->get();
-
-        return count($roster);
     }
 }

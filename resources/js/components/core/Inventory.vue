@@ -1,14 +1,21 @@
 <template>
-  <div class="card-list">
-    <div 
-      class="card-list-item"
-      v-for="(item, index) in inventory"
-      :key="index"
-    >
-      <player-card 
-        :cardData="item.player"
-        :inTeamData="item.in_team"
-      ></player-card>
+  <div>
+    <div class="w-100">
+      <roster-amount></roster-amount>
+    </div>
+    <hr>
+
+    <div class="card-list">
+      <div 
+        class="card-list-item"
+        v-for="(item, index) in inventory"
+        :key="index"
+      >
+        <player-card 
+          :cardData="item.player"
+          :inTeamData="item.in_team"
+        ></player-card>
+      </div>
     </div>
   </div>
 </template>
@@ -18,13 +25,13 @@ export default {
   props: ["inventoryData"],
 
   data: function() {
+    window.bus.$on('team_update', () => {
+      this.getInventory();
+    });
+    
     return {
       inventory: JSON.parse(this.inventoryData),
     };
-  },
-
-  updated() {
-    this.getInventory();
   },
 
   methods: {
@@ -38,7 +45,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .card-list {
   display: flex;
   flex-wrap: wrap;

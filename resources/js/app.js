@@ -21,10 +21,11 @@ window.Vue = require('vue');
 
 Vue.component('player-card', require('./components/core/PlayerCard.vue').default);
 Vue.component('inventory', require('./components/core/Inventory.vue').default);
-
+Vue.component('roster-amount', require('./components/core/RosterAmount.vue').default);
 
 /**
  * Noty setup/adding functions to window
+ * 
  */
 
 import VueNotifications from 'vue-notifications';
@@ -61,6 +62,13 @@ window.notifyError = function(message) {
         message: '<i class="fas fa-exclamation"></i>&nbsp;&nbsp;' + message
     });
 };
+
+/**
+ * Event Bus
+ * 
+ */
+
+window.bus = new Vue();
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
