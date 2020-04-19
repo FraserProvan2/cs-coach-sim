@@ -17,6 +17,7 @@ class CreateInventoryItemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('player_id');
+            $table->boolean('in_team')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

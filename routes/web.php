@@ -20,6 +20,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     // My Team routes
     Route::get('/my-team', 'MyTeam\MyTeamController@index')->name('my-team');
+    Route::get('/my-team/fetch', 'MyTeam\MyTeamController@getInventory');
+
+        // team management
+        Route::post('/my-team/add-or-remove', 'MyTeam\MyTeamController@addOrRemoveFromTeam');
 });
 
 /*-------------------------------------------------------------------------

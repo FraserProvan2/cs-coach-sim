@@ -3,17 +3,49 @@
 namespace App\Http\Controllers\MyTeam;
 
 use App\Http\Controllers\Controller;
+use App\InventoryItem;
 use App\Player;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MyTeamController extends Controller
 {
     public function index()
     {
-        $players = Player::all()->take(50);
-
         return view('pages.myteam.index', [
-            'players' => $players,
+            'inventory' => Auth::user()->inventory,
         ]);
+    }
+
+    public function getInventory()
+    {
+        return Auth::user()->inventory;
+    }
+
+    public function addOrRemoveFromTeam(Request $request)
+    {
+        $inventory_item = $this->getUsersItem($request->id);
+        
+        if ($inventory_item->in_team) {
+            $inventory_item->removeFromTeam();
+            return 0;
+        } else {
+            $inventory_item->addToTeam();
+            return 1;
+        }
+    }
+
+    private function getUsersItem($player_id)
+    {
+        $item = InventoryItem::where('player_id', $player_id)
+            ->where('user_id', Auth::user()->id)
+            ->first();
+
+        if (!$item) {
+            throw new Exception('Unable to find users inventory item');
+        }
+
+        return $item;
     }
 }

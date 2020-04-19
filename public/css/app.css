@@ -11169,14 +11169,3 @@ label,
   opacity: 1;
 }
 
-.card-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.card-list-item {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
-}
-

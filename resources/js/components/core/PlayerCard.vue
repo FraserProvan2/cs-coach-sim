@@ -1,5 +1,14 @@
 <template>
   <div class="player-card" :style="{ backgroundImage: `url(${getCardImage()})` }">
+
+    <canvas 
+      class="card-canvas" 
+      width="155" 
+      height="200"
+      @click="addOrRemoveFromTeam()"
+    >
+    </canvas>
+    
     <img class="player-body-image" :src="getPlayerImage()" />
 
     <div class="player-name h6">{{ this.player.name }}</div>
@@ -18,16 +27,20 @@
       HS%:
       <span class="player-stat-value">{{ this.player.headshots }}</span>
     </div>
+
+    <div v-if="inTeam">
+      <i class="fas fa-fw fa-check player-selected"></i>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["cardData", "card-data"],
+  props: ["cardData", "card-data", "in-team"],
 
   data: function() {
     return {
-      player: JSON.parse(this.cardData)
+      player: this.cardData,
     };
   },
 
@@ -37,6 +50,14 @@ export default {
     },
     getPlayerImage() {
       return `../images/players/${this.player.id}.png`;
+    },
+    addOrRemoveFromTeam() {
+      axios.post('/my-team/add-or-remove', { 
+          id: this.player.id 
+        })
+        .then(response => {
+          this.inTeam = response.data;
+        });
     }
   }
 };
@@ -74,5 +95,29 @@ export default {
 .player-stat-value {
   font-weight: 600;
   font-size: 12px;
+}
+
+.card-canvas {
+  position: absolute;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.player-selected {
+  position: relative;
+    bottom: 235px;
+    left: 19px;
+    font-size: 15px;
+    color: #277ffb;
+    background: #b5d4ffcf;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 31px;
+    vertical-align: middle;
+    -webkit-box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);
+    box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);
 }
 </style>
