@@ -6,6 +6,7 @@
   "scripts": {
     "getPlayerIds": "node jobs/getPlayerIds.js",
     "syncPlayers": "node jobs/SyncPlayers.js",
+    "getPlayerImages": "node jobs/getPlayerImages.js",
     "test": "jest"
   },
   "author": "",
@@ -14,7 +15,8 @@
     "bootswatch": "^4.4.1",
     "hltv": "^2.19.4",
     "moment": "^2.24.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "jest": "^25.3.0"

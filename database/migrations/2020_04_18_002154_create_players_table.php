@@ -18,7 +18,6 @@ class CreatePlayersTable extends Migration
             $table->string('hltv_id')->unique();
             $table->string('name');
             $table->string('team')->nullable();
-            $table->string('img_src');
             $table->integer('age');
             $table->string('nationality');
             $table->float('rating');

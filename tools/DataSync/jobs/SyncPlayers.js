@@ -42,7 +42,6 @@ function getPlayerStats() {
         id,
         res.ign,
         team,
-        "https://static.hltv.org//images/playerprofile/bodyshot/compressed/" + id + ".png",
         res.age,
         res.country.code,
         res.statistics.rating,
@@ -52,7 +51,7 @@ function getPlayerStats() {
         res.statistics.damagePerRound,
       ]];
 
-      const query = "REPLACE INTO players (hltv_id, name, team, img_src, age, nationality, rating, headshots, kd_ratio, kpr, dpr) VALUES ?";
+      const query = "REPLACE INTO players (hltv_id, name, team, age, nationality, rating, headshots, kd_ratio, kpr, dpr) VALUES ?";
       conn.query(query, [records], function (err, result, fields) {
         if (err) {
           console.log("Failed: " + res.ign);
