@@ -45,14 +45,14 @@ export default {
 <style scoped>
 .player-card {
   background-size: cover;
-  height: 230px;
-  width: 170px;
+  height: 217px;
+  width: 155px;
 }
 
 .player-body-image {
   position: relative;
-  max-width: 169px;
-  max-height: 187px;
+  max-width: 159px;
+  max-height: 169px;
   bottom: -9px;
   clip-path: inset(0px 0px 62px 0px);
   opacity: 88%;
@@ -60,7 +60,7 @@ export default {
 
 .player-name {
   position: relative;
-  bottom: 50px;
+  bottom: 54px;
   text-align: center;
 }
 
@@ -68,7 +68,7 @@ export default {
   text-align: center;
   font-size: 10px;
   position: relative;
-  bottom: 57px;
+  bottom: 62px;
 }
 
 .player-stat-value {

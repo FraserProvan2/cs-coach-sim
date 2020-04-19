@@ -6493,7 +6493,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.player-card[data-v-7c2cd226] {\n  background-size: cover;\n  height: 230px;\n  width: 170px;\n}\n.player-body-image[data-v-7c2cd226] {\n  position: relative;\n  max-width: 169px;\n  max-height: 187px;\n  bottom: -9px;\n  -webkit-clip-path: inset(0px 0px 62px 0px);\n          clip-path: inset(0px 0px 62px 0px);\n  opacity: 88%;\n}\n.player-name[data-v-7c2cd226] {\n  position: relative;\n  bottom: 50px;\n  text-align: center;\n}\n.player-stat[data-v-7c2cd226] {\n  text-align: center;\n  font-size: 10px;\n  position: relative;\n  bottom: 57px;\n}\n.player-stat-value[data-v-7c2cd226] {\n  font-weight: 600;\n  font-size: 12px;\n}\n", ""]);
+exports.push([module.i, "\n.player-card[data-v-7c2cd226] {\n  background-size: cover;\n  height: 217px;\n  width: 155px;\n}\n.player-body-image[data-v-7c2cd226] {\n  position: relative;\n  max-width: 159px;\n  max-height: 169px;\n  bottom: -9px;\n  -webkit-clip-path: inset(0px 0px 62px 0px);\n          clip-path: inset(0px 0px 62px 0px);\n  opacity: 88%;\n}\n.player-name[data-v-7c2cd226] {\n  position: relative;\n  bottom: 54px;\n  text-align: center;\n}\n.player-stat[data-v-7c2cd226] {\n  text-align: center;\n  font-size: 10px;\n  position: relative;\n  bottom: 62px;\n}\n.player-stat-value[data-v-7c2cd226] {\n  font-weight: 600;\n  font-size: 12px;\n}\n", ""]);
 
 // exports
 
