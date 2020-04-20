@@ -11,5 +11,6 @@ $primary: #f99d1c;
 @import "node_modules/bootswatch/dist/superhero/bootswatch";
 @import "../sass/bootstrap_override.scss";
 
-// pages
-@import '../sass/cardlist.scss'
+// Noty
+@import '~noty/lib/noty.css';
+@import '~noty/lib/themes/light.css';

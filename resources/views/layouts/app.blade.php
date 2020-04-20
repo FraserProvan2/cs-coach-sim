@@ -4,33 +4,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>CS Coach Sim</title>
+    <title>cs_ultimate_coach</title>
     <script src="{{ mix('js/app.js') }}" defer></script>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div id="app">
         <main class="py-4">
             
             {{-- Main Nav --}}
-            @if(Request::path() !== 'landing')
-                @include('includes.navbar')
-            @endif
-
+            @include('includes.navbar')
+           
             <div class="container">
                 <div class="row justify-content-center">
                     
                     {{-- Sider Bar Nav --}}
-                    <div class="col-md-3">
-                        @include('includes.sidebar')
-                    </div>
+                    @auth
+                        @if(Request::path() !== 'landing')
+                            <div class="col-md-3">
+                                @include('includes.sidebar')
+                            </div>
+                        @endif
+                    @endauth
                                 
                     {{-- Content --}}
-                    <div class="col-md-9">
-                        @yield('content')
-                    </div>
+                    @yield('content')
                 </div>
             </div>
         </main>
