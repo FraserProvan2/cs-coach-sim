@@ -1,7 +1,8 @@
 <template>
   <div>
-    <div class="w-100">
+    <div class="d-flex w-100">
       <roster-amount></roster-amount>
+      <synergy></synergy>
     </div>
     <hr>
 
@@ -25,20 +26,23 @@ export default {
   props: ["inventoryData"],
 
   data: function() {
-    window.bus.$on('team_update', () => {
-      this.getInventory();
-    });
-    
     return {
       inventory: JSON.parse(this.inventoryData),
     };
   },
 
+  mounted() {
+    this.getInventory();
+    window.bus.$on('team_update', () => {
+      this.getInventory();
+    });
+  },
+
   methods: {
     getInventory() {
-        axios.get('/my-team/fetch')
+      axios.get('/my-team/fetch')
           .then(response => {
-            this.inventory = response.data;
+            this.inventory = response.data
           });
     }
   }

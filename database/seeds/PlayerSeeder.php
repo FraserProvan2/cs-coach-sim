@@ -20,7 +20,11 @@ class PlayerSeeder extends Seeder
             ['id' => '7592', 'name' => 'device', 'type' => 'normal', 'team' => 'Astralis', 'age' => 24, 'nationality' => 'DK', 'rating' => '1.17', 'headshots' => '35.0%', 'kd_ratio' => '1.26', 'kpr' => '0.78', 'dpr' => '80.9'],
             ['id' => '11893', 'name' => 'ZywOo', 'type' => 'normal', 'team' => 'Vitality', 'age' => 19, 'nationality' => 'FR', 'rating' => '1.35', 'headshots' => '42.0%', 'kd_ratio' => '1.39', 'kpr' => '0.87', 'dpr' => '90.6'],
             ['id' => '8711', 'name' => 'Sonic', 'type' => 'normal', 'team' => 'Cloud9', 'age' => 21, 'nationality' => 'ZA', 'rating' => '1.13', 'headshots' => '46.0%', 'kd_ratio' => '1.20', 'kpr' => '0.76', 'dpr' => '80.5'],
+            ['id' => '885', 'name' => 'olofmeister', 'type' => 'normal', 'team' => 'FaZe', 'age' => 28, 'nationality' => 'SE', 'rating' => '1.08', 'headshots' => '45.9%', 'kd_ratio' => '1.13', 'kpr' => '0.73', 'dpr' => '74.7'],
+            ['id' => '8183', 'name' => 'rain', 'type' => 'normal', 'team' => 'FaZe', 'age' => 25, 'nationality' => 'NO', 'rating' => '1.05', 'headshots' => '55.6%', 'kd_ratio' => '1.06', 'kpr' => '0.73', 'dpr' => '81.8'],
+            ['id' => '18053', 'name' => 'broky', 'type' => 'normal', 'team' => 'FaZe', 'age' => 19, 'nationality' => 'LV', 'rating' => '1.08', 'headshots' => '46.4%', 'kd_ratio' => '1.09', 'kpr' => '0.67', 'dpr' => '72.2'],
         ];
+
 
         foreach($players as $player) {
             DB::table('players')->insert($player);

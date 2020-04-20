@@ -1,11 +1,20 @@
 const { HLTV } = require('hltv');
 const fs = require('fs');
+const moment = require('moment');
 const utils = require("../utils/db");
 
 const conn = utils.db();
 
 conn.connect((err) => {
-  getPlayerStats();
+
+  conn.query("SELECT * FROM players", function (err, result, fields) {
+    const playersInDb = [];
+    result.forEach(result => {
+      playersInDb.push(result.id);
+    });
+
+    getPlayerStats(playersInDb);
+  });
 });
 
 function getNextId() {
@@ -27,7 +36,7 @@ function getNextId() {
   return ids;
 }
 
-function getPlayerStats() {
+function getPlayerStats(playersInDb) {
   let id = getNextId();
 
   HLTV.getPlayerStats({id: id})
@@ -36,32 +45,49 @@ function getPlayerStats() {
       if (typeof res.team !== "undefined" && typeof res.team.name !== "undefined") {
         team = res.team.name;
       }
+      
+      // UPDATE
+      if (playersInDb.includes(id.toString())) {
+        let query = `UPDATE players SET age = "${res.age}", rating = "${res.statistics.rating}", headshots = "${res.statistics.headshots}", kd_ratio = "${res.statistics.kdRatio}", kpr = "${res.statistics.killsPerRound}", dpr = "${res.statistics.damagePerRound}" WHERE id = "${id}"`;
+        conn.query(query, function (err, result, fields) {
+          if (err) {
+            console.log("Failed: " + res.ign);
+            console.log(err);
+          } else {
+            console.log("UPDATED: " + res.ign);
+          }
+        });
+      }
+      // INSERT
+      else {
+        // ENSURE THIS MATCHES SCHEMA !!!!
+        let records = [[
+          id,
+          res.ign,
+          team,
+          res.age,
+          res.country.code,
+          res.statistics.rating,
+          res.statistics.headshots,
+          res.statistics.kdRatio,
+          res.statistics.killsPerRound,
+          res.statistics.damagePerRound,
+        ]];
 
-      // ENSURE THIS MATCHES SCHEMA !!!!
-      let records = [[
-        id,
-        res.ign,
-        team,
-        res.age,
-        res.country.code,
-        res.statistics.rating,
-        res.statistics.headshots,
-        res.statistics.kdRatio,
-        res.statistics.killsPerRound,
-        res.statistics.damagePerRound,
-      ]];
+        let query = "INSERT INTO players (id, name, team, age, nationality, rating, headshots, kd_ratio, kpr, dpr) VALUES ?";
+        conn.query(query, [records], function (err, result, fields) {
+          if (err) {
+            console.log("Failed: " + res.ign);
+            console.log(err);
+          } else {
+            console.log("INSERTED: " + res.ign);
+          }
+        });
+      }
 
-      const query = "REPLACE INTO players (id, name, team, age, nationality, rating, headshots, kd_ratio, kpr, dpr) VALUES ?";
-      conn.query(query, [records], function (err, result, fields) {
-        if (err) {
-          console.log("Failed: " + res.ign);
-          console.log(err);
-        } else {
-          console.log("Added: " + res.ign);
-        }
-      });
+
     })
     .then(res => {
-      getPlayerStats();
+      getPlayerStats(playersInDb);
     });
 }

@@ -19,6 +19,9 @@ class InventoryItemSeeder extends Seeder
             ['user_id' => 1, 'player_id' => '7592'],
             ['user_id' => 1, 'player_id' => '11893'],
             ['user_id' => 1, 'player_id' => '8711'],
+            ['user_id' => 1, 'player_id' => '885'],
+            ['user_id' => 1, 'player_id' => '8183'],
+            ['user_id' => 1, 'player_id' => '18053'],
         ];
 
         foreach($inventory_items as $item) {

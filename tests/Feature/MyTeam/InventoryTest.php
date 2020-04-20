@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\MyTeam;
 
 use App\InventoryItem;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -31,6 +31,6 @@ class InventoryTest extends TestCase
         $response->assertOk();
 
         $data = $response->decodeResponseJson();
-        $this->assertEquals(count($data), 7);
+        $this->assertEquals(count($data), 10);
     }
 }

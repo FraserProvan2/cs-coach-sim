@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex">
+  <div class="d-flex w-50 mt-1">
     <div v-for="index in 5" :key="index">
       <div :class="getClass(index)"></div>
     </div>

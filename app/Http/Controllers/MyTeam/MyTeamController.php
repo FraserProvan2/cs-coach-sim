@@ -52,7 +52,10 @@ class MyTeamController extends Controller
             return response('Roster not full', 400);
         }
 
-        return $roster;
+        return [
+            'roster' => $roster,
+            'synergy' => $this->getSynergy()
+        ];
     }
 
     public function getRosterAmount()
@@ -79,5 +82,39 @@ class MyTeamController extends Controller
             $inventory_item->addToRoster();
             return 1;
         }
+    }
+
+    /**
+     * Synergy methods
+     */
+
+    public function getSynergy()
+    {
+        $roster = InventoryItem::where('user_id', Auth::user()->id)
+            ->where('in_team', 1)
+            ->get();
+
+        $score = 0;
+        foreach($roster as $item) {
+            foreach($roster as $item_to_compare) {
+                if ($item->id !== $item_to_compare->id) {
+                    if ($item->player->team === $item_to_compare->player->team) {
+                        $score += 2;
+                    } else {
+                        if ($item->player->nationality === $item_to_compare->player->nationality) {
+                            $score += 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        $max_score = 20;
+        $calculated = (($score / $max_score) * 100);
+        if ($calculated > 100) {
+            return 100;
+        }
+        
+        return $calculated;
     }
 }
