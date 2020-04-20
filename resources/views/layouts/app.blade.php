@@ -16,22 +16,21 @@
         <main class="py-4">
             
             {{-- Main Nav --}}
-            @if(Request::path() !== 'landing')
-                @include('includes.navbar')
-            @endif
-
+            
+            @include('includes.navbar')
+           
             <div class="container">
                 <div class="row justify-content-center">
                     
                     {{-- Sider Bar Nav --}}
-                    <div class="col-md-3">
-                        @include('includes.sidebar')
-                    </div>
+                    @auth
+                        <div class="col-md-3">
+                            @include('includes.sidebar')
+                        </div>
+                    @endauth
                                 
                     {{-- Content --}}
-                    <div class="col-md-9">
-                        @yield('content')
-                    </div>
+                    @yield('content')
                 </div>
             </div>
         </main>
