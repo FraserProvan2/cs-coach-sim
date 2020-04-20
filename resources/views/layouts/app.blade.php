@@ -9,14 +9,13 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin-res/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div id="app">
         <main class="py-4">
             
             {{-- Main Nav --}}
-            
             @include('includes.navbar')
            
             <div class="container">
@@ -24,9 +23,11 @@
                     
                     {{-- Sider Bar Nav --}}
                     @auth
-                        <div class="col-md-3">
-                            @include('includes.sidebar')
-                        </div>
+                        @if(Request::path() !== 'landing')
+                            <div class="col-md-3">
+                                @include('includes.sidebar')
+                            </div>
+                        @endif
                     @endauth
                                 
                     {{-- Content --}}

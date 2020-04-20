@@ -49,7 +49,7 @@ class MyTeamController extends Controller
 
         // ensure roster is valid
         if (count($roster) !== 5) {
-            return false;
+            return response('Roster not full', 400);
         }
 
         return $roster;

@@ -4,6 +4,3 @@ clear_cache:
 	php artisan config:clear 
 	php artisan view:clear
 	composer dump-autoload
-
-test:
-	vendor/bin/phpunit

@@ -13,13 +13,13 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'username' => 'normal11',
+                'username' => 'normal',
                 'email' => 'normal_user@email.com',
                 'password' => Hash::make('password'),
                 'is_admin' => false
             ],
             [
-                'username' => 'admin11',
+                'username' => 'admin',
                 'email' => 'admin_user@email.com',
                 'password' => Hash::make('password'),
                 'is_admin' => true
