@@ -2018,7 +2018,7 @@ __webpack_require__.r(__webpack_exports__);
     addOrRemoveFromTeam: function addOrRemoveFromTeam() {
       var _this = this;
 
-      axios.post('/my-team/add-or-remove', {
+      axios.post('/my-team/roster/add-or-remove', {
         id: this.player.id
       }).then(function (response) {
         _this.inTeam = response.data;
@@ -2075,7 +2075,7 @@ __webpack_require__.r(__webpack_exports__);
     updateRosterAmount: function updateRosterAmount() {
       var _this2 = this;
 
-      axios.get('/my-team/roster-amount').then(function (response) {
+      axios.get('/my-team/roster/amount').then(function (response) {
         _this2.rosterAmount = response.data;
       });
     },

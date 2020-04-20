@@ -27,7 +27,7 @@ export default {
 
   methods: {
     updateRosterAmount() {
-      axios.get('/my-team/roster-amount')
+      axios.get('/my-team/roster/amount')
         .then(response => {
           this.rosterAmount = response.data;
         });

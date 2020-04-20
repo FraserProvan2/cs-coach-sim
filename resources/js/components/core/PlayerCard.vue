@@ -53,7 +53,7 @@ export default {
       return `../images/players/${this.player.id}.png`;
     },
     addOrRemoveFromTeam() {
-      axios.post('/my-team/add-or-remove', { 
+      axios.post('/my-team/roster/add-or-remove', { 
           id: this.player.id 
         })
         .then(response => {

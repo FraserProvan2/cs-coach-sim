@@ -4,7 +4,6 @@ namespace App\Http\Controllers\MyTeam;
 
 use App\Http\Controllers\Controller;
 use App\InventoryItem;
-use App\Player;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,13 +13,46 @@ class MyTeamController extends Controller
     public function index()
     {
         return view('pages.myteam.index', [
-            'inventory' => Auth::user()->inventory,
+            'inventory' => $this->getInventory(),
         ]);
     }
 
     public function getInventory()
     {
-        return Auth::user()->inventory;
+        return InventoryItem::where('user_id', Auth::user()->id)
+            ->orderBy('in_team', 'desc')
+            ->get();
+    }
+
+    private function getUsersItem($player_id)
+    {
+        $item = InventoryItem::where('player_id', $player_id)
+            ->where('user_id', Auth::user()->id)
+            ->first();
+            
+        if (!$item) {
+            throw new Exception('Unable to find users inventory item');
+        }
+
+        return $item;
+    }
+
+    /**
+     * Roster methods
+     */
+
+    public function getRoster()
+    {
+        $roster = InventoryItem::where('user_id', Auth::user()->id)
+            ->where('in_team', 1)
+            ->get();
+
+        // ensure roster is valid
+        if (count($roster) !== 5) {
+            return false;
+        }
+
+        return $roster;
     }
 
     public function getRosterAmount()
@@ -47,18 +79,5 @@ class MyTeamController extends Controller
             $inventory_item->addToRoster();
             return 1;
         }
-    }
-
-    private function getUsersItem($player_id)
-    {
-        $item = InventoryItem::where('player_id', $player_id)
-            ->where('user_id', Auth::user()->id)
-            ->first();
-
-        if (!$item) {
-            throw new Exception('Unable to find users inventory item');
-        }
-
-        return $item;
     }
 }
