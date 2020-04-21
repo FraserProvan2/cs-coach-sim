@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\MyTeam;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -23,7 +23,9 @@ class RosterTest extends TestCase
 
         $response = $this->get('/my-team/roster');
         $response->assertOk();
-        $this->assertEquals(count($response->decodeResponseJson()), 5);
+
+        $roster = $response->decodeResponseJson();
+        $this->assertEquals(count($roster['roster']), 5);
     }
 
     /** @test */

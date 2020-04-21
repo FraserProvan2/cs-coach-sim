@@ -10,14 +10,12 @@
 </template>
 
 <script>
-
 export default {
-  
   data: function() {
     this.updateRosterAmount();
 
-    window.bus.$on('team_update', () => {
-     this.updateRosterAmount();
+    window.bus.$on("team_update", () => {
+      this.updateRosterAmount();
     });
 
     return {
@@ -27,10 +25,9 @@ export default {
 
   methods: {
     updateRosterAmount() {
-      axios.get('/my-team/roster/amount')
-        .then(response => {
-          this.rosterAmount = response.data;
-        });
+      axios.get("/my-team/roster/amount").then(response => {
+        this.rosterAmount = response.data;
+      });
     },
     getClass(index) {
       let classVal = "roster-space";
@@ -40,10 +37,9 @@ export default {
       }
 
       return classVal;
-    },
+    }
   }
-}
-
+};
 </script>
 
 <style scoped>
@@ -62,5 +58,4 @@ export default {
 .check-icon {
   color: #f99d1c;
 }
-
 </style>

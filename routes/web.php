@@ -26,6 +26,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/my-team/roster', 'MyTeam\MyTeamController@getRoster');
         Route::get('/my-team/roster/amount', 'MyTeam\MyTeamController@getRosterAmount');
         Route::post('/my-team/roster/add-or-remove', 'MyTeam\MyTeamController@addOrRemoveFromRoster');
+        Route::get('/my-team/synergy', 'MyTeam\MyTeamController@getSynergy');
+        
 });
 
 /*-------------------------------------------------------------------------

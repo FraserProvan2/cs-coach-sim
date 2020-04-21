@@ -19,9 +19,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('player-card', require('./components/core/PlayerCard.vue').default);
-Vue.component('inventory', require('./components/core/Inventory.vue').default);
-Vue.component('roster-amount', require('./components/core/RosterAmount.vue').default);
+Vue.component('player-card', require('./components/MyTeam/PlayerCard.vue').default);
+Vue.component('inventory', require('./components/MyTeam/Inventory.vue').default);
+Vue.component('roster-amount', require('./components/MyTeam/RosterAmount.vue').default);
+Vue.component('synergy', require('./components/MyTeam/Synergy.vue').default);
 
 /**
  * Noty setup/adding functions to window
@@ -62,6 +63,14 @@ window.notifyError = function(message) {
         message: '<i class="fas fa-exclamation"></i>&nbsp;&nbsp;' + message
     });
 };
+
+/**
+ * Bootstrap Vue
+ * 
+ */
+
+import BootstrapVue from "bootstrap-vue";
+Vue.use(BootstrapVue)
 
 /**
  * Event Bus
