@@ -90,6 +90,7 @@ class MyTeamController extends Controller
 
     public function getSynergy()
     {
+
         $roster = InventoryItem::where('user_id', Auth::user()->id)
             ->where('in_team', 1)
             ->get();
@@ -99,22 +100,20 @@ class MyTeamController extends Controller
             foreach($roster as $item_to_compare) {
                 if ($item->id !== $item_to_compare->id) {
                     if ($item->player->team === $item_to_compare->player->team) {
+                        $score += 1;
+                    } else if ($item->player->nationality === $item_to_compare->player->nationality) {
                         $score += 2;
-                    } else {
-                        if ($item->player->nationality === $item_to_compare->player->nationality) {
-                            $score += 1;
-                        }
                     }
                 }
             }
         }
 
-        $max_score = 20;
+        $max_score = 10;
         $calculated = (($score / $max_score) * 100);
         if ($calculated > 100) {
             return 100;
         }
         
-        return $calculated;
+        return round($calculated);
     }
 }

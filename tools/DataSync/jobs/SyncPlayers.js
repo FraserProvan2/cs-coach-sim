@@ -1,6 +1,5 @@
 const { HLTV } = require('hltv');
 const fs = require('fs');
-const moment = require('moment');
 const utils = require("../utils/db");
 
 const conn = utils.db();

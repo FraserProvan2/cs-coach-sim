@@ -1,7 +1,10 @@
 <template>
-  <div class="d-flex w-50 justify-content-end synergy">
-    <i class="fas fa-dna synergy-icon"></i>
-    <div>{{ this.synergy }}%</div>
+  <div class="d-flex synergy mt-1">
+    <div>Synergy:</div>
+
+    <b-progress :max="100">
+      <b-progress-bar class="text-dark" :value="this.synergy" :label="`${this.synergy}%`"></b-progress-bar>
+    </b-progress>
   </div>
 </template>
 
@@ -29,13 +32,21 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .synergy {
   color: #b5d5ff;
 }
 
-.synergy-icon {
-  margin-top: 4px;
-  margin-right: 3px;
+.progress {
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 0px!Important;
+  width: 90%;
+  background-color: #6d7680;
+}
+
+.progress-bar {
+  background-color: #b5d5ff !important;
 }
 </style>

@@ -65,6 +65,14 @@ window.notifyError = function(message) {
 };
 
 /**
+ * Bootstrap Vue
+ * 
+ */
+
+import BootstrapVue from "bootstrap-vue";
+Vue.use(BootstrapVue)
+
+/**
  * Event Bus
  * 
  */
