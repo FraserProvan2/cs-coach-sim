@@ -24,6 +24,8 @@ Vue.component('inventory', require('./components/MyTeam/Inventory.vue').default)
 Vue.component('roster-amount', require('./components/MyTeam/RosterAmount.vue').default);
 Vue.component('synergy', require('./components/MyTeam/Synergy.vue').default);
 
+Vue.component('tokens', require('./components/Tokens.vue').default);
+
 /**
  * Noty setup/adding functions to window
  * 
