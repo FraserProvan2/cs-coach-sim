@@ -14,4 +14,5 @@
 2. Then run `npm run syncPlayers` to update the players stats (preferebly on a VPN)
 This command gets the HLTV data and adds or updates the player using the API url in config
 
-1. `npm run getPlayerImages` to update all images, failed downloads will use placeholder.png
+1. `npm run getPlayerImages` downloads images if they currently do not exist, you can use the endpoint `/api/player/check-missing-images`
+to check if the current installation of your application is missing any images, if so run the npm command in the repo and redeploy.
