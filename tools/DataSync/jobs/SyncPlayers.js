@@ -1,41 +1,11 @@
 const { HLTV } = require('hltv');
 const fs = require('fs');
-const utils = require("../utils/db");
+const axios = require('axios');
+const config = require('../config.json');
 
-const conn = utils.db();
+getPlayerStats();
 
-conn.connect((err) => {
-
-  conn.query("SELECT * FROM players", function (err, result, fields) {
-    const playersInDb = [];
-    result.forEach(result => {
-      playersInDb.push(result.id);
-    });
-
-    getPlayerStats(playersInDb);
-  });
-});
-
-function getNextId() {
-  let players = JSON.parse(fs.readFileSync('players.json'));
-  let thisJobPlayers = players.slice(0, 1);
-
-  // remove from array and update json
-  players.splice(0, 1);
-  fs.unlinkSync('players.json');
-  fs.appendFile('players.json', JSON.stringify(players), function (err) {
-    if (err) throw err;
-  });
-
-  let ids = [];
-  thisJobPlayers.forEach(player => {
-    ids.push(player.id);
-  }); 
-
-  return ids;
-}
-
-function getPlayerStats(playersInDb) {
+function getPlayerStats() {
   let id = getNextId();
 
   HLTV.getPlayerStats({id: id})
@@ -44,49 +14,41 @@ function getPlayerStats(playersInDb) {
       if (typeof res.team !== "undefined" && typeof res.team.name !== "undefined") {
         team = res.team.name;
       }
-      
-      // UPDATE
-      if (playersInDb.includes(id.toString())) {
-        let query = `UPDATE players SET age = "${res.age}", rating = "${res.statistics.rating}", headshots = "${res.statistics.headshots}", kd_ratio = "${res.statistics.kdRatio}", kpr = "${res.statistics.killsPerRound}", dpr = "${res.statistics.damagePerRound}" WHERE id = "${id}"`;
-        conn.query(query, function (err, result, fields) {
-          if (err) {
-            console.log("Failed: " + res.ign);
-            console.log(err);
-          } else {
-            console.log("UPDATED: " + res.ign);
-          }
-        });
-      }
-      // INSERT
-      else {
-        // ENSURE THIS MATCHES SCHEMA !!!!
-        let records = [[
-          id,
-          res.ign,
-          team,
-          res.age,
-          res.country.code,
-          res.statistics.rating,
-          res.statistics.headshots,
-          res.statistics.kdRatio,
-          res.statistics.killsPerRound,
-          res.statistics.damagePerRound,
-        ]];
 
-        let query = "INSERT INTO players (id, name, team, age, nationality, rating, headshots, kd_ratio, kpr, dpr) VALUES ?";
-        conn.query(query, [records], function (err, result, fields) {
-          if (err) {
-            console.log("Failed: " + res.ign);
-            console.log(err);
-          } else {
-            console.log("INSERTED: " + res.ign);
-          }
-        });
-      }
+      axios.post(config.api_url + '/player/addOrUpdate', {
+        id: id,
+        name: res.ign,
+        type: "normal",
+        team: team,
+        age: res.age,
+        nationality: res.country.code,
+        rating: res.statistics.rating,
+        headshots: res.statistics.headshots,
+        kd_ratio: res.statistics.kdRatio,
+        kpr: res.statistics.killsPerRound,
+        dpr: res.statistics.damagePerRound,
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
-
-    })
-    .then(res => {
-      getPlayerStats(playersInDb);
+      getPlayerStats();
     });
+}
+
+function getNextId() {
+  let players = JSON.parse(fs.readFileSync('players.json'));
+  let thisJobPlayer = players.slice(0, 1);
+
+  // remove from array and update json
+  players.splice(0, 1);
+  fs.unlinkSync('players.json');
+  fs.appendFileSync('players.json', JSON.stringify(players), function (err) {
+    if (err) throw err;
+  });
+
+  return thisJobPlayer[0].id;
 }

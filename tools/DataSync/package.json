@@ -7,16 +7,15 @@
     "getPlayerIds": "node jobs/getPlayerIds.js",
     "syncPlayers": "node jobs/SyncPlayers.js",
     "getPlayerImages": "node jobs/getPlayerImages.js",
-    "getTeamData": "node jobs/getTeamData.js",
     "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "bootswatch": "^4.4.1",
     "hltv": "^2.19.4",
     "moment": "^2.24.0",
-    "mysql": "^2.18.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
