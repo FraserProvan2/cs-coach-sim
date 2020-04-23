@@ -16,10 +16,13 @@
     </div>
     <hr />
 
-    <div class="card-list">
+    <div class="card-list" v-if="filteredInventory">
       <div class="card-list-item" v-for="item in filteredInventory" :key="item.id">
-        <player-card :cardData="item.player" :inTeamData="item.in_team"></player-card>
+        <player-card :itemId="item.id" :cardData="item.player" :inTeamData="item.in_team"></player-card>
       </div>
+    </div>
+    <div class="text-center my-4" v-else>
+      You have no players
     </div>
   </div>
 </template>
