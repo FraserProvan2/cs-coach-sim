@@ -2040,10 +2040,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getCardImage: function getCardImage() {
-      return "../images/cards/".concat(this.player.type, ".png");
+      return "../storage/images/cards/".concat(this.player.type, ".png");
     },
     getPlayerImage: function getPlayerImage() {
-      return "../images/players/".concat(this.player.id, ".png");
+      return "../storage/images/players/".concat(this.player.id, ".png");
     },
     addOrRemoveFromTeam: function addOrRemoveFromTeam() {
       var _this = this;

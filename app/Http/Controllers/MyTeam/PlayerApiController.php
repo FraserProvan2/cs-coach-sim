@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MyTeam;
 use App\Http\Controllers\Controller;
 use App\Player;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PlayerApiController extends Controller
 {
@@ -40,5 +41,18 @@ class PlayerApiController extends Controller
                 return response("error adding " . $player->name, 400);
             }
         }
+    }
+
+    public function checkForMissingPlayerImages()
+    {
+        $players = Player::all();
+        $missing = [];
+        foreach($players as $player) {
+            $exists = Storage::exists('public/images/players/' . $player->id . '.png');
+            if (!$exists) {
+                $missing[] = $player->id;
+            }
+        }
+        return $missing;
     }
 }

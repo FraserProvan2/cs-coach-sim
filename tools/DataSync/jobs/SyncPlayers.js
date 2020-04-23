@@ -15,7 +15,7 @@ function getPlayerStats() {
         team = res.team.name;
       }
 
-      axios.post(config.api_url + '/player/addOrUpdate', {
+      axios.post(config.api_url + '/player/add-or-update', {
         id: id,
         name: res.ign,
         type: "normal",

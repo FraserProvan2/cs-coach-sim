@@ -58,10 +58,10 @@ export default {
 
   methods: {
     getCardImage() {
-      return `../images/cards/${this.player.type}.png`;
+      return `../storage/images/cards/${this.player.type}.png`;
     },
     getPlayerImage() {
-      return `../images/players/${this.player.id}.png`;
+      return `../storage/images/players/${this.player.id}.png`;
     },
     addOrRemoveFromTeam() {
       axios.post('/my-team/roster/add-or-remove', { 
