@@ -45,7 +45,7 @@ class InventoryItem extends Model
             }
     
             $user = Auth::user();
-            $user->tokens += $amount;
+            $user->tokens = round($user->tokens + $amount);
 
             return $user->save();
         } else {
