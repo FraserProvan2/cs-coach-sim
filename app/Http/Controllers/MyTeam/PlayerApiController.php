@@ -12,6 +12,19 @@ class PlayerApiController extends Controller
     public function addOrUpdate(Request $request)
     {
         $player = Player::find($request->id);
+
+        $request->validate([
+            'id' => 'required',
+            'name' => 'required',
+            'team' => 'required',
+            'age' => 'required',
+            'nationality' => 'required',
+            'rating' => 'required',
+            'headshots' => 'required',
+            'kd_ratio' => 'required',
+            'kpr' => 'required',
+            'dpr' => 'required',
+        ]);
         
         // UPDATE
         if ($player) {

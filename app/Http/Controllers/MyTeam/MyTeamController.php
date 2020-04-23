@@ -34,10 +34,10 @@ class MyTeamController extends Controller
         $item = InventoryItem::findOrFail($request->id);
         $result = $item->sell();
 
-        // if ($result) {
-        //     return
-        // }
+        if ($result) {
+            return response('Player Sold!');
+        }
 
-        // return
+        return respones('Oops! Something went wrong!');
     }
 }
