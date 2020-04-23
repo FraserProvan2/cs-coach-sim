@@ -36,6 +36,6 @@ class SellPlayerTest extends TestCase
             'id' => 1
         ]);
 
-        $this->assertEquals(Auth::user()->tokens, 2062.0);
+        $this->assertEquals(Auth::user()->tokens, 1062.0);
     }
 }
