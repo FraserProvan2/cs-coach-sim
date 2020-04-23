@@ -28,15 +28,26 @@
       <span class="player-stat-value">{{ this.player.headshots }}</span>
     </div>
 
+    <i class="fas fa-fw fa-coins sell-player" v-b-modal="this.modalName"></i>
+
     <div v-if="inTeam">
       <i class="fas fa-fw fa-check player-selected"></i>
     </div>
+
+    <b-modal 
+      :id='this.modalName' 
+      :title="modalTitle" 
+      @ok="this.sellPlayer"
+      class="confirmationModal"
+    >
+      {{ modalMessage }}
+    </b-modal>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["cardData", "card-data", "in-team-data"],
+  props: ["itemId", "cardData", "card-data", "in-team-data"],
 
   data: function() {
     return {
@@ -67,9 +78,40 @@ export default {
 
           window.bus.$emit('team_update', {});
         }).catch(error => {
-           window.notifyError(error.response.data);
+          window.notifyError(error.response.data);
         });
     },
+    sellPlayer() {
+      axios.post('/my-team/sell-player', { 
+          id: this.itemId
+        })
+        .then(response => {
+          window.bus.$emit('team_update', {});
+          window.bus.$emit('token_update', {});
+          window.notifySuccess("Player sold!");
+        })
+        .catch(error => {
+          window.notifyError(error.response.data);
+        });
+    }
+  },
+
+  computed: {
+    modalName() {
+      return `modal_${this.player.id}`;
+    },
+    modalMessage() {
+      let amount = 50;
+      if (this.player.type != "normal") {
+        amount = (parseInt(amount) + 1000);
+      }
+      amount = (this.player.rating * amount).toFixed(0);
+
+      return `Are you sure you want to sell ${this.player.name} for ${amount}?`;
+    },
+    modalTitle() {
+      return `Sell ${this.player.name}`;
+    }
   }
 };
 </script>
@@ -116,19 +158,36 @@ export default {
 
 .player-selected {
   position: relative;
-    bottom: 235px;
-    left: 19px;
-    font-size: 15px;
-    color: #277ffb;
-    background: #b5d4ffcf;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 31px;
-    vertical-align: middle;
-    -webkit-box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);
-    -moz-box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);
-    box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);
+  bottom: 253px;
+  left: 19px;
+  font-size: 15px;
+  color: #277ffb;
+  background: #b5d4ffcf;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 31px;
+  vertical-align: middle;
+  box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);
 }
+
+.sell-player {
+  position: relative;
+  border-radius: 50%;
+  bottom: 76px;
+  left: 113px;
+  line-height: 22px;
+  width: 20px;
+  height: 20px;
+  color: #ffdc58;
+  background: #9c9463c7;
+  font-size: 10px;
+  text-align: center;
+  vertical-align: middle;
+  box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);
+  z-index: 1000;
+  outline: none!important;
+}
+
 </style>

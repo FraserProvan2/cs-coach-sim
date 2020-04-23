@@ -21,11 +21,13 @@ Route::group(['middleware' => ['auth']], function () {
     // My Team routes
     Route::get('/my-team', 'MyTeam\MyTeamController@index')->name('my-team');
     Route::get('/my-team/fetch', 'MyTeam\MyTeamController@getInventory');
+    Route::post('/my-team/sell-player', 'MyTeam\MyTeamController@sellPlayer');
     
         // roster management
-        Route::get('/my-team/roster', 'MyTeam\MyTeamController@getRoster');
-        Route::get('/my-team/roster/amount', 'MyTeam\MyTeamController@getRosterAmount');
-        Route::post('/my-team/roster/add-or-remove', 'MyTeam\MyTeamController@addOrRemoveFromRoster');
+        Route::get('/my-team/roster', 'MyTeam\RosterController@getRoster');
+        Route::get('/my-team/roster/amount', 'MyTeam\RosterController@getRosterAmount');
+        Route::post('/my-team/roster/add-or-remove', 'MyTeam\RosterController@addOrRemoveFromRoster');
+        
         Route::get('/my-team/synergy', 'MyTeam\MyTeamController@getSynergy');
 
     // General

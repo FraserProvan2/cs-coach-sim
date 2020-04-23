@@ -1934,6 +1934,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["inventoryData"],
   data: function data() {
@@ -2016,8 +2019,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["cardData", "card-data", "in-team-data"],
+  props: ["itemId", "cardData", "card-data", "in-team-data"],
   data: function data() {
     return {
       player: this.cardData,
@@ -2049,6 +2063,35 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         window.notifyError(error.response.data);
       });
+    },
+    sellPlayer: function sellPlayer() {
+      axios.post('/my-team/sell-player', {
+        id: this.itemId
+      }).then(function (response) {
+        window.bus.$emit('team_update', {});
+        window.bus.$emit('token_update', {});
+        window.notifySuccess("Player sold!");
+      })["catch"](function (error) {
+        window.notifyError(error.response.data);
+      });
+    }
+  },
+  computed: {
+    modalName: function modalName() {
+      return "modal_".concat(this.player.id);
+    },
+    modalMessage: function modalMessage() {
+      var amount = 50;
+
+      if (this.player.type != "normal") {
+        amount = parseInt(amount) + 1000;
+      }
+
+      amount = (this.player.rating * amount).toFixed(0);
+      return "Are you sure you want to sell ".concat(this.player.name, " for ").concat(amount, "?");
+    },
+    modalTitle: function modalTitle() {
+      return "Sell ".concat(this.player.name);
     }
   }
 });
@@ -47545,7 +47588,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.player-card[data-v-6bae5208] {\n  background-size: cover;\n  height: 217px;\n  width: 155px;\n}\n.player-body-image[data-v-6bae5208] {\n  position: relative;\n  max-width: 159px;\n  max-height: 169px;\n  bottom: -9px;\n  -webkit-clip-path: inset(0px 0px 62px 0px);\n          clip-path: inset(0px 0px 62px 0px);\n  opacity: 88%;\n}\n.player-name[data-v-6bae5208] {\n  position: relative;\n  bottom: 54px;\n  text-align: center;\n}\n.player-stat[data-v-6bae5208] {\n  text-align: center;\n  font-size: 10px;\n  position: relative;\n  bottom: 62px;\n}\n.player-stat-value[data-v-6bae5208] {\n  font-weight: 600;\n  font-size: 12px;\n}\n.card-canvas[data-v-6bae5208] {\n  position: absolute;\n  z-index: 100;\n  cursor: pointer;\n}\n.player-selected[data-v-6bae5208] {\n  position: relative;\n    bottom: 235px;\n    left: 19px;\n    font-size: 15px;\n    color: #277ffb;\n    background: #b5d4ffcf;\n    width: 30px;\n    height: 30px;\n    border-radius: 50%;\n    text-align: center;\n    line-height: 31px;\n    vertical-align: middle;\n    box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);\n}\n", ""]);
+exports.push([module.i, "\n.player-card[data-v-6bae5208] {\n  background-size: cover;\n  height: 217px;\n  width: 155px;\n}\n.player-body-image[data-v-6bae5208] {\n  position: relative;\n  max-width: 159px;\n  max-height: 169px;\n  bottom: -9px;\n  -webkit-clip-path: inset(0px 0px 62px 0px);\n          clip-path: inset(0px 0px 62px 0px);\n  opacity: 88%;\n}\n.player-name[data-v-6bae5208] {\n  position: relative;\n  bottom: 54px;\n  text-align: center;\n}\n.player-stat[data-v-6bae5208] {\n  text-align: center;\n  font-size: 10px;\n  position: relative;\n  bottom: 62px;\n}\n.player-stat-value[data-v-6bae5208] {\n  font-weight: 600;\n  font-size: 12px;\n}\n.card-canvas[data-v-6bae5208] {\n  position: absolute;\n  z-index: 100;\n  cursor: pointer;\n}\n.player-selected[data-v-6bae5208] {\n  position: relative;\n  bottom: 253px;\n  left: 19px;\n  font-size: 15px;\n  color: #277ffb;\n  background: #b5d4ffcf;\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  text-align: center;\n  line-height: 31px;\n  vertical-align: middle;\n  box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);\n}\n.sell-player[data-v-6bae5208] {\n  position: relative;\n  border-radius: 50%;\n  bottom: 76px;\n  left: 113px;\n  line-height: 22px;\n  width: 20px;\n  height: 20px;\n  color: #ffdc58;\n  background: #9c9463c7;\n  font-size: 10px;\n  text-align: center;\n  vertical-align: middle;\n  box-shadow: 1px 4px 17px -6px rgba(0,0,0,0.75);\n  z-index: 1000;\n  outline: none!important;\n}\n\n", ""]);
 
 // exports
 
@@ -83005,23 +83048,31 @@ var render = function() {
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "card-list" },
-      _vm._l(_vm.filteredInventory, function(item) {
-        return _c(
+    _vm.filteredInventory
+      ? _c(
           "div",
-          { key: item.id, staticClass: "card-list-item" },
-          [
-            _c("player-card", {
-              attrs: { cardData: item.player, inTeamData: item.in_team }
-            })
-          ],
-          1
+          { staticClass: "card-list" },
+          _vm._l(_vm.filteredInventory, function(item) {
+            return _c(
+              "div",
+              { key: item.id, staticClass: "card-list-item" },
+              [
+                _c("player-card", {
+                  attrs: {
+                    itemId: item.id,
+                    cardData: item.player,
+                    inTeamData: item.in_team
+                  }
+                })
+              ],
+              1
+            )
+          }),
+          0
         )
-      }),
-      0
-    )
+      : _c("div", { staticClass: "text-center my-4" }, [
+          _vm._v("\n    You have no players\n  ")
+        ])
   ])
 }
 var staticRenderFns = []
@@ -83093,12 +83144,35 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
+      _c("i", {
+        directives: [
+          {
+            name: "b-modal",
+            rawName: "v-b-modal",
+            value: this.modalName,
+            expression: "this.modalName"
+          }
+        ],
+        staticClass: "fas fa-fw fa-coins sell-player"
+      }),
+      _vm._v(" "),
       _vm.inTeam
         ? _c("div", [
             _c("i", { staticClass: "fas fa-fw fa-check player-selected" })
           ])
-        : _vm._e()
-    ]
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          staticClass: "confirmationModal",
+          attrs: { id: this.modalName, title: _vm.modalTitle },
+          on: { ok: this.sellPlayer }
+        },
+        [_vm._v("\n    " + _vm._s(_vm.modalMessage) + "\n  ")]
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []
