@@ -25,7 +25,7 @@ class PlayerApiController extends Controller
             'kpr' => 'required',
             'dpr' => 'required',
         ]);
-        
+
         // UPDATE
         if ($player) {
             $player->team = $request->team;
@@ -60,7 +60,7 @@ class PlayerApiController extends Controller
     {
         $players = Player::all();
         $missing = [];
-        foreach($players as $player) {
+        foreach ($players as $player) {
             $exists = Storage::exists('public/images/players/' . $player->id . '.png');
             if (!$exists) {
                 $missing[] = $player->id;
