@@ -37,18 +37,10 @@
           <span>Dashboard</span></a>
       </li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Crawling
-      </div>
-
       <li class="nav-item">
         <a class="nav-link" href="{{ url('/admin/players') }}">
           <i class="fas fa-fw fa-cogs"></i>
-          <span>Players</span></a>
+          <span>Player Cards</span></a>
       </li>
 
       <!-- Sidebar Toggler (Sidebar) -->

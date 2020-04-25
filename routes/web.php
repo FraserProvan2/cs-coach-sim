@@ -42,4 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::get('/admin', 'Admin\AdminController@index');
+
+    // Player Cards
+    Route::get('/admin/players', 'Admin\PlayerCardController@index');
 });
