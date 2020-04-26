@@ -30,6 +30,7 @@ class PlayerCardController extends Controller
 
         $player = new Player($request->all());
         $player->id = '9900' . $request->id;
+        $player->nationality = strtoupper($request->nationality);
         $player->save();
 
         return redirect('/admin/players/9900' . $request->id);
@@ -46,9 +47,11 @@ class PlayerCardController extends Controller
     public function update(Request $request, $id)
     {
         $this->validatePlayer();
+        $data = $request->all();
 
         $player = Player::findOrFail($id);
-        $player->update($request->all());
+        $data['nationality'] = strtoupper($request['nationality']);
+        $player->update($data);
         
         return back();
     }
