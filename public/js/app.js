@@ -2081,14 +2081,7 @@ __webpack_require__.r(__webpack_exports__);
       return "modal_".concat(this.player.id);
     },
     modalMessage: function modalMessage() {
-      var amount = 50;
-
-      if (this.player.type != "normal") {
-        amount = parseInt(amount) + 1000;
-      }
-
-      amount = (this.player.rating * amount).toFixed(0);
-      return "Are you sure you want to sell ".concat(this.player.name, " for ").concat(amount, "?");
+      return "Are you sure you want to sell ".concat(this.player.name, " for ").concat(this.player.value, "?");
     },
     modalTitle: function modalTitle() {
       return "Sell ".concat(this.player.name);

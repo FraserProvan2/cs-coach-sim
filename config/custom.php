@@ -8,6 +8,6 @@ return [
 
     'cardTypes' => [
         'normal',
-        'moments'
+        'historic'
     ]
 ];

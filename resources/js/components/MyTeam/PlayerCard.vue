@@ -101,13 +101,7 @@ export default {
       return `modal_${this.player.id}`;
     },
     modalMessage() {
-      let amount = 50;
-      if (this.player.type != "normal") {
-        amount = (parseInt(amount) + 1000);
-      }
-      amount = (this.player.rating * amount).toFixed(0);
-
-      return `Are you sure you want to sell ${this.player.name} for ${amount}?`;
+      return `Are you sure you want to sell ${this.player.name} for ${this.player.value}?`;
     },
     modalTitle() {
       return `Sell ${this.player.name}`;
