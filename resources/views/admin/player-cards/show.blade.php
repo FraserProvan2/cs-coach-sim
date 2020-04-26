@@ -6,7 +6,7 @@
   <h1 class="h3 mb-0 text-gray-800">{{ $player->name }}</h1>
 </div>
 
-<div class="row">
+<div class="row mb-2">
   <div class="col-md-6">
     <div class="card">
       <div class="card-header">Player Details</div>
@@ -107,17 +107,17 @@
 
   <div class="col-md-6">
     <div class="card">
-      <div class="card-header">Player Stats</div>
+      <div class="card-header">Player Image</div>
       <div class="card-body">
 
-        <form method="post" action="{{ url('/admin/players/' . $player->id .'/update-image') }}">
+        <form method="post" action="{{ url('/admin/players/' . $player->id .'/update-image') }}"  enctype="multipart/form-data">
           @csrf
 
           <img src="{{ asset('storage/images/players/' . $player->id . '.png') }}">
 
           <div class="input-group mt-3">
             <div class="custom-file">
-              <input type="file" class="custom-file-input" name="player-image">
+              <input type="file" class="custom-file-input" id="file" name="playerImage">
               <label class="custom-file-label">Select new image</label>
             </div>
           </div>
@@ -134,19 +134,5 @@
     </div>
   </div>
 </div>
-
-<div class="card my-2">
-  <div class="card-body">
-    <h5>Danger Zone</h5>
-
-    <form method="post" action="{{ url('/admin/players/' . $player->id . '/destroy') }}"> 
-      @csrf
-      @method('DELETE')
-      <button type="submit" class="btn btn-danger">Delete Player</button>
-    </form>
-  </div>
-</div>
-
-
 
 @endsection
