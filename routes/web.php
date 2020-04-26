@@ -45,9 +45,12 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     // Player Cards
     Route::get('/admin/players', 'Admin\PlayerCardController@index');
+    Route::get('/admin/players/create', 'Admin\PlayerCardController@create');
+    Route::post('/admin/players/store', 'Admin\PlayerCardController@store');
     Route::get('/admin/players/{player_id}', 'Admin\PlayerCardController@edit');
     Route::post('/admin/players/{player_id}/update', 'Admin\PlayerCardController@update');
     Route::post('/admin/players/{player_id}/update-image', 'Admin\PlayerCardController@updateImage');
     Route::get('/admin/players/{player_id}/update-image', 'Admin\PlayerCardController@updateImage');
     Route::delete('/admin/players/{player_id}/destroy', 'Admin\PlayerCardController@destroy');
+    
 });

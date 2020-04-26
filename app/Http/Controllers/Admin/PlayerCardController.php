@@ -18,35 +18,34 @@ class PlayerCardController extends Controller
 
     public function create()
     {
-        //
+        return view('admin.player-cards.create', [
+            'card_types' => config('custom.cardTypes')
+        ]);
     }
 
     public function store(Request $request)
     {
-        //
+        $this->validatePlayer();
+        request()->validate(['id' => 'required']);
+
+        $player = new Player($request->all());
+        $player->id = '9900' . $request->id;
+        $player->save();
+
+        return redirect('/admin/players/9900' . $request->id);
     }
 
     public function edit($id)
     {
-        return view('admin.player-cards.show', [
-            'player' => Player::find($id)
+        return view('admin.player-cards.edit', [
+            'player' => Player::find($id),
+            'card_types' => config('custom.cardTypes')
         ]);
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => ['required'],
-            'type' => ['required'],
-            'team' => ['required'],
-            'age' => ['required', 'numeric'],
-            'nationality' => ['required'],
-            'rating' => ['required', 'numeric'],
-            'headshots' => ['required'],
-            'kd_ratio' => ['required', 'numeric'],
-            'kpr' => ['required', 'numeric'],
-            'dpr' => ['required', 'numeric'],
-        ]);
+        $this->validatePlayer();
 
         $player = Player::findOrFail($id);
         $player->update($request->all());
@@ -67,5 +66,20 @@ class PlayerCardController extends Controller
         Storage::putFileAs('public/images/players/', $player_image, $image_name);
 
        return back();
+    }
+
+    private function validatePlayer()
+    {
+        return request()->validate([
+            'name' => ['required'],
+            'type' => ['required'],
+            'age' => ['required', 'numeric'],
+            'nationality' => ['required'],
+            'rating' => ['required', 'numeric'],
+            'headshots' => ['required'],
+            'kd_ratio' => ['required', 'numeric'],
+            'kpr' => ['required', 'numeric'],
+            'dpr' => ['required', 'numeric'],
+        ]);
     }
 }

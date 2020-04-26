@@ -7,6 +7,10 @@
   <h1 class="h3 mb-0 text-gray-800">Player Cards</h1>
 </div>
 
+<div class="d-flex my-2">
+  <a href="{{ url('/admin/players/create') }}" class="btn btn-primary">Create Player Card</a>
+</div>
+
 <div class="row">
   <div class="col-md-12">
     

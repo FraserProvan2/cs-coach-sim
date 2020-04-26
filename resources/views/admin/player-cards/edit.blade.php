@@ -29,8 +29,9 @@
               <label>Type</label>
               <div class="input-group">
                 <select class="custom-select" name="type">
-                  <option value="normal" {{ ($player->type === 'normal' ? 'selected' : '') }}>normal</option>
-                  <option value="moments" {{ ($player->type === 'moments' ? 'selected' : '') }}>moments</option>
+                  @foreach($card_types as $type)
+                    <option value="normal" {{ ($player->type === $type ? 'selected' : '') }}>{{ $type }}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -46,7 +47,7 @@
             {{-- Team --}}
             <div class="col-md-6 form-group">
               <label>Team</label>
-              <input type="text" class="form-control" value="{{ $player->team }}" name="team" required>
+              <input type="text" class="form-control" value="{{ $player->team }}" name="team">
             </div>
           </div>
 
