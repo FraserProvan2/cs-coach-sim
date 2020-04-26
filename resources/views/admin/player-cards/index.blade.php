@@ -10,7 +10,31 @@
 <div class="row">
   <div class="col-md-12">
     
-    
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">@sortablelink('id')</th>
+          <th scope="col">@sortablelink('name')</th>
+          <th scope="col">@sortablelink('type')</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach ($players as $player)
+          <tr>
+            <td>{{ $player->id }}</td>
+            <td>
+              <a href="{{ url('admin/players/' . $player->id) }}">
+                {{ $player->name }}
+              </a>
+            </td>
+            <td>{{ $player->type }}</td>
+          </tr>
+        @endforeach
+      </tbody>
+    </table>
+
+    {!! $players->appends(\Request::except('page'))->render() !!}
+
   </div>
 </div>
 
