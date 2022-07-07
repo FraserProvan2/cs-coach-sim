@@ -15,7 +15,7 @@
     "axios": "^0.19.2",
     "bootswatch": "^4.4.1",
     "hltv": "^2.19.4",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "request": "^2.88.2"
   },
   "devDependencies": {
